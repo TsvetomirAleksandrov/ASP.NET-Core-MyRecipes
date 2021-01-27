@@ -58,17 +58,21 @@
             }
         }
 
-        public IEnumerable<RecipeInListViewModel> GetAll(int page, int itemsPerPage = 12)
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage = 12)
         {
             var recipes = this.recipesRepository.AllAsNoTracking()
              .OrderByDescending(x => x.Id)
              .Skip((page - 1) * itemsPerPage)
              .Take(itemsPerPage)
-             .To<RecipeInListViewModel>()
+             .To<T>()
              .ToList();
 
             return recipes;
         }
 
+        public int GetCount()
+        {
+            return this.recipesRepository.All().Count();
+        }
     }
 }
