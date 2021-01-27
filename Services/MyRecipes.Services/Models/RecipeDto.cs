@@ -24,8 +24,6 @@
 
         public string OriginalUrl { get; set; }
 
-        public string RemoteImageUrl { get; set; }
-
         public string Extension { get; set; }
 
         public List<string> Ingredients { get; set; }

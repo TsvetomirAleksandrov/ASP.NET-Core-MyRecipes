@@ -63,7 +63,6 @@
             foreach (var image in input.Images)
             {
                 var extension = Path.GetExtension(image.FileName).TrimStart('.');
-
                 if (!this.AllowedExtensions.Any(x => extension.EndsWith(x)))
                 {
                     throw new Exception($"Invalid image extension {extension}");
@@ -74,7 +73,6 @@
                         AddedByUserId = userId,
                         Extension = extension,
                     };
-
                 recipe.Images.Add(dbImage);
 
                 var physicalPath = $"{imagePath}/recipes/{dbImage.Id}.{extension}";

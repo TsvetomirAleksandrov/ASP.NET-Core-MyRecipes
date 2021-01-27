@@ -10,7 +10,7 @@ using MyRecipes.Data;
 namespace MyRecipes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210127140401_Initial")]
+    [Migration("20210127145635_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
