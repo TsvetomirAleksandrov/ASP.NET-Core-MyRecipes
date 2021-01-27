@@ -4,6 +4,7 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Text;
@@ -110,8 +111,9 @@
 
                 var image = new Image
                 {
-                    Extension = recipe.OriginalUrl,
+                    Extension = Path.GetExtension(recipe.OriginalUrl),
                     RecipeId = newRecipe.Id,
+                    RemoteImageUrl = recipe.OriginalUrl,
                 };
 
                 await this.imagesRepository.AddAsync(image);
