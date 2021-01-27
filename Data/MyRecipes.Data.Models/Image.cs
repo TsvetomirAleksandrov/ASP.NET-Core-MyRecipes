@@ -17,11 +17,11 @@
 
         public string Extension { get; set; }
 
-        //public string RemoteImageUrl { get; set; }
+        // public string RemoteImageUrl { get; set; }
 
         ////The content of the image is in the file system
 
-        public int AddedByUserId { get; set; }
+        public string AddedByUserId { get; set; }
 
         public ApplicationUser AddedByUser { get; set; }
     }

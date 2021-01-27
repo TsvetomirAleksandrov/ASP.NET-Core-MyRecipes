@@ -3,6 +3,7 @@
     public class IndexViewModel
     {
         public int SettingsCount { get; set; }
+
         public int CategoriesCount { get; set; }
     }
 }

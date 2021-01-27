@@ -5,6 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
+    using Microsoft.AspNetCore.Http;
+
     public class CreateRecipeInputModel
     {
         [Required]
@@ -23,9 +25,13 @@
         [Display(Name = "Cooking time (in minutes)")]
         public int CookingTime { get; set; }
 
+        [Range(1, 100)]
         public int PortionsCount { get; set; }
 
         public int CategoryId { get; set; }
+
+        [Range(1, 10)]
+        public IEnumerable<IFormFile> Images { get; set; }
 
         public IEnumerable<RecipeIngredientInputModel> Ingredients { get; set; }
 
