@@ -40,4 +40,8 @@
     <ProjectReference Include="..\MyRecipes.Web.Infrastructure\MyRecipes.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MyRecipes.Web.ViewModels\MyRecipes.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\recipes\" />
+  </ItemGroup>
 </Project>

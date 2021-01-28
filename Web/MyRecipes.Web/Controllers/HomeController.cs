@@ -16,7 +16,6 @@
     {
         private IGetCountsService countsService;
 
-        // private IMapper mapper;
         public HomeController(IGetCountsService countsService)
         {
             this.countsService = countsService;

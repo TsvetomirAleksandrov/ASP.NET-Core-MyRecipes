@@ -13,7 +13,7 @@
 
     public class RecipesService : IRecipesService
     {
-        private readonly string[] AllowedExtensions = new[] { "jpg", "png", "gif" };
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Recipe> recipesRepository;
         private readonly IDeletableEntityRepository<Ingredient> ingredientsRepository;
 
@@ -63,7 +63,7 @@
             foreach (var image in input.Images)
             {
                 var extension = Path.GetExtension(image.FileName).TrimStart('.');
-                if (!this.AllowedExtensions.Any(x => extension.EndsWith(x)))
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
                 {
                     throw new Exception($"Invalid image extension {extension}");
                 }
@@ -94,6 +94,15 @@
              .ToList();
 
             return recipes;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var recipe = this.recipesRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return recipe;
         }
 
         public int GetCount()

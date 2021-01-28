@@ -111,7 +111,6 @@
 
                 var image = new Image
                 {
-                    Extension = Path.GetExtension(recipe.OriginalUrl),
                     RecipeId = newRecipe.Id,
                     RemoteImageUrl = recipe.OriginalUrl,
                 };
