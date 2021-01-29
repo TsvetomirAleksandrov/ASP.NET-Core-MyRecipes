@@ -1,11 +1,12 @@
 ﻿namespace MyRecipes.Web.ViewModels.Recipes
 {
-    using AutoMapper;
-    using MyRecipes.Data.Models;
-    using MyRecipes.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using AutoMapper;
+    using MyRecipes.Data.Models;
+    using MyRecipes.Services.Mapping;
 
     public class SingleRecipeViewModel : IMapFrom<Recipe>, IHaveCustomMappings
     {
