@@ -26,13 +26,17 @@
 
         public TimeSpan CookingTime { get; set; }
 
+        public int CategoryRecipesCount { get; set; }
+
+        public string OriginalUrl { get; set; }
+
         public int PortionsCount { get; set; }
 
         public IEnumerable<IngredientsViewModel> Ingredients { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Recipe, RecipeInListViewModel>()
+            configuration.CreateMap<Recipe, SingleRecipeViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                   opt.MapFrom(x =>
                    x.Images.FirstOrDefault().RemoteImageUrl != null ?

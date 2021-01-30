@@ -1,12 +1,9 @@
 ﻿namespace MyRecipes.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
 
     public interface IGotvachBgScraperService
     {
-        Task PopulateDbWithRecipesAsync(int recipesCount);
+        Task ImportRecipesAsync(int fromId = 1, int toId = 1000);
     }
 }

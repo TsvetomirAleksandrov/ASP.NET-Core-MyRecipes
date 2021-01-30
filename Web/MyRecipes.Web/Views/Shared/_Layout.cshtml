@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     @await this.RenderSectionAsync("Styles", required: false);
 </head>
@@ -24,17 +25,17 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                             </li>
 
                             @if (this.User.Identity.IsAuthenticated)
                             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="All">All Recipes</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="All">Всички рецепти</a>
                 </li>
 }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="Create">Create Recipe</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="Create">Сподели рецепта</a>
                             </li>
                         </ul>
                     </div>

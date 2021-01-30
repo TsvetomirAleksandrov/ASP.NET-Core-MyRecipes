@@ -24,7 +24,7 @@
 
         public string OriginalUrl { get; set; }
 
-        public string Extension { get; set; }
+        public string ImageUrl { get; set; }
 
         public List<string> Ingredients { get; set; }
     }
