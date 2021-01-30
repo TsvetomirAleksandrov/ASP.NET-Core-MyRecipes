@@ -1,11 +1,11 @@
-﻿namespace MyRecipes.Services.Data
-{
-    using MyRecipes.Data.Common.Repositories;
-    using MyRecipes.Data.Models;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using MyRecipes.Data.Common.Repositories;
+using MyRecipes.Data.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
+namespace MyRecipes.Services.Data
+{
     public class VotesService : IVotesService
     {
         private readonly IRepository<Vote> votesRepository;
@@ -13,6 +13,13 @@
         public VotesService(IRepository<Vote> votesRepository)
         {
             this.votesRepository = votesRepository;
+        }
+
+        public double GetAverageVotes(int recipeId)
+        {
+            return this.votesRepository.All()
+                .Where(x => x.RecipeId == recipeId)
+                .Average(x => x.Value);
         }
 
         public async Task SetVoteAsync(int recipeId, string userId, byte value)
