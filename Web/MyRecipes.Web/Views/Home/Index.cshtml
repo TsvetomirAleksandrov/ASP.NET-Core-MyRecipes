@@ -8,9 +8,24 @@
     <link href="~/css/HighChart/index.css" rel="stylesheet" />
 }
 
-<div class="text-center">
+<div class="text-center row">
     <h1 class="display-4">Добре дошли в @GlobalConstants.SystemName!</h1>
-    <div class="col-md-4 offset-md-4">
+    <div class="col-md-8">
+        <div class="row">
+            @foreach (var recipe in this.Model.RandomRecipes)
+            {
+                <div class="card col-md-6">
+                    <img class="card-img-top" src="@recipe.ImageUrl" alt="@recipe.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@recipe.Name</h5>
+                        <p class="card-text">@recipe.CategoryName</p>
+                        <a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id" class="btn btn-primary">Отвори</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
         <p>Сайтът съдържа:</p>
         <ul>
             <li class="list-group-item bg-info">Рецепти: @Model.RecipesCount</li>
