@@ -128,16 +128,17 @@
                 .To<T>().ToList();
         }
 
-        //public async Task UpdateAsync(int id, EditRecipeInputModel input)
-        //{
-        //    var recipes = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
-        //    recipes.Name = input.Name;
-        //    recipes.Instructions = input.Instructions;
-        //    recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
-        //    recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
-        //    recipes.PortionsCount = input.PortionsCount;
-        //    recipes.CategoryId = input.CategoryId;
-        //    await this.recipesRepository.SaveChangesAsync();
-        //}
+
+        public async Task UpdateAsync(int id, EditRecipeInputModel input)
+        {
+            var recipes = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
+            recipes.Name = input.Name;
+            recipes.Instructions = input.Instructions;
+            recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
+            recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
+            recipes.PortionsCount = input.PortionsCount;
+            recipes.CategoryId = input.CategoryId;
+            await this.recipesRepository.SaveChangesAsync();
+        }
     }
 }
