@@ -92,7 +92,7 @@
                                 {
                                     <span>Порции</span>
                                 }
-                                                    </div>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         'X-CSRF-TOKEN': antiForgeryToken,
                     },
                     success: function (data) {
-                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                        $('#averageVoteValue').html(Math.round(data.averageVote.toFixed(1)));
                     },
                     contentType: "application/json",
                 });
