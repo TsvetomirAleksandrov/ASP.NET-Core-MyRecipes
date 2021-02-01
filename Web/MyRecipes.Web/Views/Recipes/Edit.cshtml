@@ -1,12 +1,12 @@
 ﻿@model MyRecipes.Web.ViewModels.Recipes.EditRecipeInputModel
-@{ 
+@{
     ViewData["Title"] = "Промени рецепта";
     var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form method="post">
+<form method="post" id="editForm">
     <div class="form-group">
         <label asp-for="Name"></label>
         <input asp-for="Name" class="form-control" />
@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Instructions"></label>
-        <input asp-for="Instructions" class="form-control" />
+        <textarea asp-for="Instructions" class="form-control"></textarea>
         <span asp-validation-for="Instructions" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -34,10 +34,32 @@
     </div>
     <div class="form-group">
         <label asp-for="CategoryId"></label>
-        <select asp-for="CategoryId" asp-items="categoryItems"></select>
+        <select asp-for="CategoryId" asp-items="categoryItems" class="form-control"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <hr />
     <input type="hidden" asp-for="Id" />
-    <input type="submit" class="btn btn-success" value="Save changes" />
 </form>
+
+<button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Потвърди промените</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Потвърди промените</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Желаеш ли да запазиш промените?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Потвърди</button>
+            </div>
+        </div>
+    </div>
+</div>
