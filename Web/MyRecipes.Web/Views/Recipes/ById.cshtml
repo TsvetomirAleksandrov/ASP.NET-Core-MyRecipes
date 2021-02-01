@@ -4,11 +4,9 @@
     this.ViewData["Title"] = Model.Name;
 }
 
-
 <div class="single-recipe-layout1">
     <div class="ctg-name">@Model.CategoryName</div>
     <h2 class="item-title">@this.ViewData["Title"]</h2>
-
     <div class="row mb-4">
         <div class="col-xl-9 col-12">
             <ul class="entry-meta">
@@ -17,14 +15,14 @@
                     @Model.CreatedOn.ToShortDateString()
                 </li>
                 <li class="single-meta">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-user"></i> by
                     @if (string.IsNullOrWhiteSpace(Model.AddedByUserEmail))
                     {
-                        <a href="@Model.OriginalUrl" target="_blank">Създадено от recepti.gotvach.bg</a>
+                        <a href="@Model.OriginalUrl" target="_blank">recepti.gotvach.bg</a>
                     }
                     else
                     {
-                        <span>Създадено от @Model.AddedByUserEmail</span>
+                        <span>@Model.AddedByUserEmail</span>
                     }
                 </li>
                 <li class="single-meta">
@@ -40,14 +38,27 @@
                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
                     <li class="single-meta">
-                        <a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Редактирай</a>  
+                        <a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Редактирай</a>
                     </li>
+                    <li class="single-meta">
+                        <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+                        </form>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
+                    </li>
+                    @*<li class="single-meta">
+                        <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
+                            <button class="btn btn-warning">Ипрати на имейл</button>
+                        </form>
+                    </li>
+                    <li class="single-meta">
+                        <button class="btn btn-warning" onclick="window.print()">Печат</button>
+                    </li>*@
                 }
             </ul>
         </div>
-        
+    </div>
     <div class="item-figure">
-        <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Name">
+        <img class="img-fluid w-100" src="@Model.ImageUrl" alt="@Model.Name" />
     </div>
     <div class="item-feature">
         <ul>
@@ -58,7 +69,7 @@
                             <i class="far fa-clock"></i>
                         </div>
                         <div class="media-body space-sm">
-                            <div class="feature-title">Приготвяне:</div>
+                            <div class="feature-title">Приготвяне</div>
                             <div class="feature-sub-title">@Model.PreparationTime.TotalMinutes Минути</div>
                         </div>
                     </div>
@@ -71,7 +82,7 @@
                             <i class="fas fa-utensils"></i>
                         </div>
                         <div class="media-body space-sm">
-                            <div class="feature-title">Готвене:</div>
+                            <div class="feature-title">Готвене</div>
                             <div class="feature-sub-title">@Model.CookingTime.TotalMinutes Минути</div>
                         </div>
                     </div>
@@ -84,18 +95,18 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="media-body space-sm">
-                            <div class="feature-title">Порции:</div>
+                            <div class="feature-title">Порции</div>
                             <div class="feature-sub-title">
                                 @Model.PortionsCount
                                 @if (Model.PortionsCount == 1)
                                 {
-                                    <span>Порция</span>
+                                    <span>Човек</span>
                                 }
                                 else
                                 {
-                                    <span>Порции</span>
+                                    <span>Човека</span>
                                 }
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,23 +115,22 @@
                 <div class="feature-wrap">
                     <div class="media">
                         <div class="feature-icon">
-                            <i class="far fa-clone"></i>
+                            <i class="fa fa-list-ol"></i>
                         </div>
                         <div class="media-body space-sm">
-                            <div class="feature-title">Подобни:</div>
-                            <div class="feature-sub-title">@Model.CategoryRecipesCount</div>
+                            <div class="feature-title">Подобни рецепти</div>
+                            <div class="feature-sub-title text-center">@Model.CategoryRecipesCount</div>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-
     <div class="making-elements-wrap">
         <div class="row">
             <div class="col-md-6">
                 <p class="item-description">
-                   @Model.Instructions
+                    @Model.Instructions
                 </p>
             </div>
             <div class="col-md-6">
@@ -128,9 +138,9 @@
                     <h3 class="item-title"><i class="fas fa-list-ul"></i>Съставки</h3>
                     @foreach (var ingredient in Model.Ingredients)
                     {
-                <div class="checkbox checkbox-primary">
-                    <label for="checkbox1">@ingredient.Quantity @ingredient.IngredientName</label>
-                </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@ingredient.Quantity @ingredient.IngredientName</li>
+                        </ul>
                     }
                 </div>
             </div>
@@ -146,20 +156,33 @@
                 var recipeId = @Model.Id;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
                 var data = { recipeId: recipeId, value: value };
-
                 $.ajax({
                     type: "POST",
                     url: "/api/Votes",
                     data: JSON.stringify(data),
                     headers: {
-                        'X-CSRF-TOKEN': antiForgeryToken,
+                        'X-CSRF-TOKEN': antiForgeryToken
                     },
                     success: function (data) {
-                        $('#averageVoteValue').html(Math.round(data.averageVote.toFixed(1)));
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
                     },
-                    contentType: "application/json",
+                    contentType: 'application/json',
                 });
             })
         });
     </script>
 }
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Искаш ли да изтриеш "@Model.Name"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Да</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
+</div>

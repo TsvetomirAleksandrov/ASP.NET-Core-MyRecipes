@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using MyRecipes.Services.Data;
+    using MyRecipes.Web.ViewModels.Recipes;
     using MyRecipes.Web.ViewModels.SearchRecipes;
 
     public class SearchRecipesController : BaseController
@@ -32,8 +33,8 @@
         {
             var viewModel = new ListViewModel
             {
-               // Recipes = this.recipesService
-               //.GetByIngredients<RecipeInListViewModel>(input.Ingredients),
+                Recipes = this.recipesService
+                .GetByIngredients<RecipeInListViewModel>(input.Ingredients),
             };
 
             return this.View(viewModel);

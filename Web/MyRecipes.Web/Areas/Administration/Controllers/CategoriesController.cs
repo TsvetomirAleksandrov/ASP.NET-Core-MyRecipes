@@ -1,17 +1,13 @@
-﻿namespace MyRecipes.Web.Controllers
+﻿namespace MyRecipes.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
-    using MyRecipes.Data;
     using MyRecipes.Data.Common.Repositories;
     using MyRecipes.Data.Models;
-    using MyRecipes.Web.Areas.Administration.Controllers;
+
     public class CategoriesController : AdministrationController
     {
         private readonly IDeletableEntityRepository<Category> dataRepository;

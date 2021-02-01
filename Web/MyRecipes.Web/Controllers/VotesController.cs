@@ -26,8 +26,7 @@
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.votesService.SetVoteAsync(input.RecipeId, userId, input.Value);
             var averageVotes = this.votesService.GetAverageVotes(input.RecipeId);
-            return new PostVoteResponseModel { AverageVote = averageVotes };     
+            return new PostVoteResponseModel { AverageVote = averageVotes };
         }
-
     }
 }

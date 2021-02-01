@@ -128,7 +128,6 @@
                 .To<T>().ToList();
         }
 
-
         public async Task UpdateAsync(int id, EditRecipeInputModel input)
         {
             var recipes = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
