@@ -30,17 +30,20 @@
 
                             @if (this.User.Identity.IsAuthenticated)
                             {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="All">Всички рецепти</a>
-                </li>
-                            }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="All">Всички рецепти</a>
+                        </li>}
                             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Админ панел</a>
-                </li>       }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Админ панел</a>
+                        </li>
+}
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="Create">Сподели рецепта</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SearchRecipes" asp-action="Index">Търси</a>
                             </li>
                         </ul>
                     </div>
