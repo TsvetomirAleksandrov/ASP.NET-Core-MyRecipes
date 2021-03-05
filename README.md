@@ -1,21 +1,3 @@
-## Package Installation
-
-You can install this template using [NuGet](https://www.nuget.org/packages/AspNetCoreTemplate):
-
-```powershell
-dotnet new -i AspNetCoreTemplate
-```
-
-```powershell
-dotnet new aspnet-core -n YourProjectName
-```
-
-## Pack this Template
-
-```powershell
-dotnet pack .\nuget.csproj
-```
-
 ## Project Overview
 
 ![Dependencies Graph](https://user-images.githubusercontent.com/25417032/97107966-0e5fc500-16d3-11eb-9b9c-c73012ff97ac.png)
