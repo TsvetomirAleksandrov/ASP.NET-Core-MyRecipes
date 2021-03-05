@@ -162,11 +162,6 @@ This solution folder contains three subfolders:
 
 If you are having problems, please let us know by [raising a new issue](https://github.com/NikolayIT/ASP.NET-Core-Template/issues).
 
-## Example Projects
-
-- <https://github.com/NikolayIT/PressCenters.com>
-- <https://github.com/NikolayIT/nikolay.it>
-
 ## License
 
 This project is licensed with the [MIT license](LICENSE).
